@@ -1,10 +1,12 @@
 
 body{
-  background-color: #f30d0d;
+  background-color: #FFFFFE;
   position: relative;
 }
-p{
+.expression{
   color:#2CB67D;
+  text-align: end;
+  width: 43%;
 }
 .container{
   position: absolute;
@@ -14,9 +16,22 @@ p{
   background-color: #16161A;
   padding: 5%;
 }
-/* .input{
-  width: 100%;
-} */
+ .input{
+  height: 40px;
+  background-color: transparent;
+  border: none;
+  color:#FFFFFE;
+  font-size: 250%;
+  width: 43%;
+  text-align: right;
+  margin-bottom: 10px;
+}
+.input:focus{
+  outline: none;
+}
+.result{
+  color:#2CB67D
+}
 
 button{
   min-height: 10px;
