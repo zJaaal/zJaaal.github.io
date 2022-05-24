@@ -1,21 +1,48 @@
 
+html, body{
+  width: 100%;
+  height: 100%;
+}
+:root{
+  --highcontrast:#2CB67D ;
+  --lowcontrast: #7f5af0;
+  --font: #FFFFFE;
+  --shade: #94A1B2;
+  --background: #16161A;
+}
 body{
-  background-color: #FFFFFE;
+  background-color: #16161A;;
   position: relative;
 }
+.powered{
+  color: var(--highcontrast);
+  font-family: 'Chakra Petch', Arial, Helvetica, sans-serif;
+  font-weight: 300;
+  font-style: italic;
+  position: absolute;
+  top: 95%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+}
+span{
+  color: var(--lowcontrast);
+  font-weight: 600;
+}
 .expression{
-  color:#2CB67D;
+  color:var(--highcontrast);
   text-align: end;
+  font-family: 'Chakra Petch',Arial, Helvetica, sans-serif;
+  font-weight: 600;
   width: 43%;
 }
 .result{
-  color:#2CB67D
+  color:var(--highcontrast);
 }
 .container{
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%,50%);
+  transform: translate(-50%,-50%);
   background-color: #16161A;
   padding: 5%;
 }
@@ -23,8 +50,10 @@ body{
   height: 40px;
   background-color: transparent;
   border: none;
-  color:#FFFFFE;
+  color: var(--font);
   font-size: 250%;
+  font-family: 'Chakra Petch', Arial, Helvetica, sans-serif;
+  font-weight: 700;
   width: 43%;
   text-align: right;
   margin-bottom: 10px;
@@ -33,26 +62,28 @@ body{
   outline: none;
 }
 .contrast{
-  background-color: #2CB67D;
+  background-color: var(--highcontrast);
 }
 .contrast:hover{
-  background-color: #FFFFFE;
+  background-color: var(--font);
 }
 .ans{
-  background-color: #7f5af0;
+  background-color: var(--lowcontrast);
 }
 .ans:hover{
  background-color: #32235e;
- color: #FFFFFE;
+ color: var(--font);
 }
 .char:hover{
-  background-color: #94A1B2;
+  background-color: var(--shade);
 }
 button{
   outline: none !important;
   min-height: 10px;
   min-width: 14px;
   font-size: 5vmin;
+  font-family: 'Chakra Petch', Arial, Helvetica, sans-serif;
+  font-weight: 300;
   width: 10%;
   border-radius: 10%;
   margin: .3vmax;  
@@ -63,11 +94,3 @@ button{
 button.disable{
   visibility: hidden;
 }
-
-.colors{
-  color:#2CB67D ;
-  color: #7f5af0;
-  color: #FFFFFE;
-  color: #94A1B2;
-  color: #16161A;
-} 
