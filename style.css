@@ -49,7 +49,7 @@ body{
   background-color: #94A1B2;
 }
 button{
-  outline: none;
+  outline: none !important;
   min-height: 10px;
   min-width: 14px;
   font-size: 5vmin;
