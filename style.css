@@ -6,16 +6,23 @@ body{
 }
 .container{
   background-color: #16161A;
-  padding: .5vh 15vw;
+  padding: 10%;
   height: fit-content;
+  width: fit-content ;
+}
+.row{
+  size: 25%;
 }
 button{
   margin: 5px;
   font-size: 5vmin;
-  width: auto;
+  border-radius: 100px;
+  display: inline-block;
+  border: none;
+  text-decoration: none;
 }
-.bottom{
-  justify-content: right;
+.col{
+  padding: 5%;
 }
 
 .colors{
