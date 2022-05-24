@@ -1,6 +1,10 @@
+
 body{
-  color: #FFFFFE;
+  background-color: #f30d0d;
   position: relative;
+}
+p{
+  color:#2CB67D;
 }
 .container{
   position: absolute;
@@ -10,6 +14,9 @@ body{
   background-color: #16161A;
   padding: 5%;
 }
+/* .input{
+  width: 100%;
+} */
 
 button{
   min-height: 10px;
