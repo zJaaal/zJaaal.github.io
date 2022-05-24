@@ -8,6 +8,9 @@ body{
   text-align: end;
   width: 43%;
 }
+.result{
+  color:#2CB67D
+}
 .container{
   position: absolute;
   top: 50%;
@@ -16,7 +19,7 @@ body{
   background-color: #16161A;
   padding: 5%;
 }
- .input{
+.input{
   height: 40px;
   background-color: transparent;
   border: none;
@@ -29,11 +32,24 @@ body{
 .input:focus{
   outline: none;
 }
-.result{
-  color:#2CB67D
+.contrast{
+  background-color: #2CB67D;
 }
-
+.contrast:hover{
+  background-color: #FFFFFE;
+}
+.ans{
+  background-color: #7f5af0;
+}
+.ans:hover{
+ background-color: #32235e;
+ color: #FFFFFE;
+}
+.char:hover{
+  background-color: #94A1B2;
+}
 button{
+  outline: none;
   min-height: 10px;
   min-width: 14px;
   font-size: 5vmin;
