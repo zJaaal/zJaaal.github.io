@@ -6,18 +6,14 @@ body{
 }
 .container{
   background-color: #16161A;
-  padding: 10%;
-  height: fit-content;
-  width: fit-content ;
-}
-.row{
-  size: 25%;
+  padding: 5%;
 }
 button{
-  margin: 5px;
+  margin: .3vmax;
   font-size: 5vmin;
   border-radius: 100px;
-  display: inline-block;
+  width: 10%;
+  display: block;
   border: none;
   text-decoration: none;
 }
