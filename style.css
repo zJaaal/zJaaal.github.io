@@ -36,7 +36,7 @@ span{
   width: 43%;
 }
 .result{
-  color:var(--highcontrast);
+  color:var(--lowcontrast);
 }
 .container{
   position: absolute;
