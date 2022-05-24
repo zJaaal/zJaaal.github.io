@@ -8,6 +8,7 @@ body{
   background-color: #16161A;
   padding: 5%;
 }
+
 button{
   margin: .3vmax;
   font-size: 5vmin;
@@ -16,9 +17,6 @@ button{
   display: block;
   border: none;
   text-decoration: none;
-}
-.col{
-  padding: 5%;
 }
 
 .colors{
