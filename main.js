@@ -2,193 +2,124 @@
 const expression = document.querySelector(".expression");
 const currentNumber = document.querySelector(".input");
 const charElements = document.querySelectorAll(".char");
-const contrastElements = document.querySelectorAll(".contrast");
+const opElements = document.querySelectorAll(".contrast.op");
 const answer = document.querySelector(".ans");
+const emptyBtn = document.querySelector(".contrast[value='E']");
+const clearBtn = document.querySelector(".contrast[value='C']");
+
 let isResult = false;
+let pointExist = false;
 
 const inputChar = (e) => { 
-  if(!currentNumber.value[0] && e.target.value == "0"){
+  if(expression.innerHTML[0] == 0 && e.target.value == "0"){
     return;
   }
-  if(isResult)
+  if(e.target.value == "." && pointExist)
     return;
-  if(e.target.value == "." && !currentNumber.value){
-    currentNumber.value ="0.";
-    return;
-  }
-  if(e.target.value == "." && currentNumber.value.includes("."))
-    return;
+    
+    if(e.target.value == "." && isNaN(Number(expression.innerHTML.slice(-1))) && expression.innerHTML.slice(-1) != "."){;
+      expression.innerHTML += "0.";
+      pointExist = true
+      return;
+    }
 
-  currentNumber.value += e.target.value
+  if(e.target.value == "." && isNaN(Number(expression.innerHTML.slice(-1)))){
+    console.log(expression.innerHTML.slice(-1));
+    expression.innerHTML = "0.";
+    pointExist = true;
+    return;
+  }
+  if(e.target.value == "." && expression.innerHTML[length - 1] == "0"){
+    expression.innerHTML +=".";
+    pointExist = true;
+    return;
+  }
+
+  if(expression.innerHTML.slice(-2) == "0." && e.target.value != "."){
+    expression.innerHTML += e.target.value;
+    pointExist = true;
+    return;
+  }
+  if(expression.innerHTML[0] == "0" && e.target.value != "." && expression.innerHTML.length == 1){
+    expression.innerHTML = e.target.value;
+    return;
+  }
+
+  expression.innerHTML += e.target.value
 }; 
-const deleteChar = () =>{
-  if(currentNumber.value[0] === "="){
-    currentNumber.classList.remove("result");
-    isResult = false;
-    currentNumber.value = currentNumber.value.slice(1);
-    return;
-  }
-  if(!currentNumber.value){
-    if(expression.innerHTML == 0){
-      return;
-    }
-    if(expression.innerHTML.length == 1){
-      expression.innerHTML = "0";
-      return;
-    }
-    expression.innerHTML = expression.innerHTML.slice(0, -1);
-    return;
-  }
-    currentNumber.value = currentNumber.value.slice(0, -1);
-};
 
 const deleteString = () =>{
+  pointExist = false;
   if(!currentNumber.value){
     expression.innerHTML = "0";
     return;
   }
   currentNumber.classList.remove("result");
   isResult = false;
-    currentNumber.value = "";
+  currentNumber.value = "";
 };
 
-const addNumber = () =>{
-  if(isResult)
-    return;
+const deleteChar = () =>{
+  if(currentNumber.value)
+    deleteString();
 
-  if(currentNumber.value[0] == "-"){
-    currentNumber.value = currentNumber.value.slice(1);
+    if(expression.innerHTML == 0){
+      return;
+    }
+    if(expression.innerHTML.length == 1){
+      pointExist = false;
+      expression.innerHTML = "0";
+      return;
+    }
+    if(expression.innerHTML.slice(0, -1) == ".")
+      pointExist = false;
+
+    expression.innerHTML = expression.innerHTML.slice(0, -1);
+};
+
+const handleAction = (e) =>{
+  pointExist = false;
+
+  if(isNaN(Number(expression.innerHTML.slice(-1)))){
+    expression.innerHTML = replaceAt(expression.innerHTML.lastIndexOf(expression.innerHTML.slice(-1)), expression.innerHTML, e.target.value);
     return;
   }
-  if(expression.innerHTML[0] == "0"){
-    expression.innerHTML = currentNumber.value;
-    currentNumber.value = "";
+  if(expression.innerHTML.slice(-1) == "0"){
     return;
   }
-  if(!currentNumber.value)
-    return;
-  expression.innerHTML += " + " + currentNumber.value;
-  currentNumber.value = "";
-}
-
-const subNumber = () =>{
-  if(isResult)
-    return;
-
-  if(!currentNumber.value){
-    currentNumber.value += "- ";
-    return;
-  }
-  if(expression.innerHTML[0] == "0"){
-    expression.innerHTML = currentNumber.value;
-    currentNumber.value = "";
-    return;
-  }
-  if(currentNumber.value[0] == "-"){
-    expression.innerHTML += " " + currentNumber.value;
-    currentNumber.value = "";
-    return;
-  }
-  expression.innerHTML += " - " + currentNumber.value;
-  currentNumber.value = "";
-}
-
-const modNumber = () =>{
-  if(isResult)
-    return;
-
-    if(expression.innerHTML[0] == "0"){
-      expression.innerHTML = currentNumber.value;
-      currentNumber.value = "";
-      return;
-    }
-
-    if(!currentNumber.value){
-      return;
-    }
-    expression.innerHTML += " % " + currentNumber.value;
-    currentNumber.value = "";
-}
-
-const divNumber = () =>{
-  if(isResult)
-    return;
-    
-    if(expression.innerHTML[0] == "0"){
-      expression.innerHTML = currentNumber.value;
-      currentNumber.value = "";
-      return;
-    }
-
-    if(!currentNumber.value){
-      return;
-    }
-    expression.innerHTML += " / " + currentNumber.value;
-    currentNumber.value = "";
-}
-const mulNumber = () =>{
-  if(isResult)
-    return;
-
-    
-    if(expression.innerHTML[0] == "0"){
-      expression.innerHTML = currentNumber.value;
-      currentNumber.value = "";
-      return;
-    }
-
-    if(!currentNumber.value){
-      return;
-    }
-    expression.innerHTML += " * " + currentNumber.value;
-    currentNumber.value = "";
+  expression.innerHTML += e.target.value;
 }
 
 const resolveAnswer = () =>{
-  let result = eval(expression.innerHTML);
+  if(isNaN(expression.innerHTML.slice(-1)))
+    expression.innerHTML = expression.innerHTML.slice(0, -1);
+
+  let result = eval(expression.innerHTML); 
   currentNumber.classList.add("result");
   isResult = true;
   currentNumber.value = "= " + result;
 }
+
 answer.addEventListener("click", resolveAnswer);
+clearBtn.addEventListener("click", deleteChar);
+emptyBtn.addEventListener("click", deleteString);
 
 charElements.forEach(btn => {
   btn.addEventListener("click", inputChar);
 });
 
-//Jejeje
-const constrastActions={};
-constrastActions["C"] = deleteChar;
-constrastActions["E"] = deleteString;
-constrastActions["+"] = addNumber;
-constrastActions["-"] = subNumber;
-constrastActions["%"] = modNumber;
-constrastActions["/"] = divNumber;
-constrastActions["*"] = mulNumber;
-
-
-contrastElements.forEach( element =>{
-    element.addEventListener("click", constrastActions[element.value]);
+opElements.forEach( element =>{
+    element.addEventListener("click", handleAction);
 })
 
-// // Every contrast function for testing
-// const clearBtn = document.querySelector(".contrast[value='C']");
-// clearBtn.addEventListener("click", deleteChar);
 
-// const emptyBtn = document.querySelector(".contrast[value='E']");
-// emptyBtn.addEventListener("click", deleteString);
+function replaceAt(index, string, replace){
+  let newString = [];
+  for(let i = 0; i < string.length; i++){
+    newString[i] = string[i];
+    if(i == index)
+    newString[i] = replace;
 
-// const addBtn =  document.querySelector(".contrast[value='+']");
-// addBtn.addEventListener("click", addNumber);
-
-// const subBtn = document.querySelector(".contrast[value='-']");
-// subBtn.addEventListener("click", subNumber);
-
-// const modBtn = document.querySelector(".contrast[value='%']");
-// modBtn.addEventListener("click", modNumber);
-
-// const divBtn = document.querySelector(".contrast[value='/']");
-// divBtn.addEventListener("click", divNumber);
-
-// const mulBtn = document.querySelector(".contrast[value='*']");
-// mulBtn.addEventListener("click", mulNumber);
+  };
+  return newString.join("");
+}
