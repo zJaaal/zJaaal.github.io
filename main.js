@@ -79,7 +79,6 @@ const deleteChar = () =>{
 };
 
 const handleAction = (e) =>{
-  console.log(expression.innerHTML.slice(-1));
   if(isNaN(Number(expression.innerHTML.slice(-1))) && expression.innerHTML.slice(-1) == ".")
     return;
   pointExist = false;
@@ -88,7 +87,7 @@ const handleAction = (e) =>{
     expression.innerHTML = replaceAt(expression.innerHTML.lastIndexOf(expression.innerHTML.slice(-1)), expression.innerHTML, e.target.value);
     return;
   }
-  if(expression.innerHTML.slice(-1) == "0" && expression.length == 1){
+  if(expression.innerHTML.slice(-1) == "0" && expression.innerHTML.length == 1){
     return;
   }
   expression.innerHTML += e.target.value;
