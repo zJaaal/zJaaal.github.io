@@ -97,9 +97,17 @@ const resolveAnswer = () =>{
   if(isNaN(expression.innerHTML.slice(-1)))
     expression.innerHTML = expression.innerHTML.slice(0, -1);
 
-  let result = eval(expression.innerHTML); 
+  let result = eval(expression.innerHTML);
   currentNumber.classList.add("result");
   isResult = true;
+  if(result.toString().lastIndexOf('.') == -1){
+    result = result.toExponential(2);
+    currentNumber.value = "= " + result;
+    return;
+  }
+  if(result.toString().length > 6)
+    result = Number.parseFloat(result).toExponential(2);
+
   currentNumber.value = "= " + result;
 }
 
