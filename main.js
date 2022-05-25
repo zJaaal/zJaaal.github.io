@@ -12,47 +12,47 @@ let isResult = false;
 let pointExist = false;
 
 const inputChar = (e) => { 
-  if(expression.innerHTML[0] == 0 && e.target.value == "0" && expression.length == 1){
+  if(expression.value[0] == 0 && e.target.value == "0" && expression.length == 1){
     return;
   }
   if(e.target.value == "." && pointExist)
     return;
     
-    if(e.target.value == "." && isNaN(Number(expression.innerHTML.slice(-1))) && expression.innerHTML.slice(-1) != "."){;
-      expression.innerHTML += "0.";
+    if(e.target.value == "." && isNaN(Number(expression.value.slice(-1))) && expression.value.slice(-1) != "."){;
+      expression.value += "0.";
       pointExist = true
       return;
     }
 
-  if(e.target.value == "." && isNaN(Number(expression.innerHTML.slice(-1)))){
-    console.log(expression.innerHTML.slice(-1));
-    expression.innerHTML = "0.";
+  if(e.target.value == "." && isNaN(Number(expression.value.slice(-1)))){
+    console.log(expression.value.slice(-1));
+    expression.value = "0.";
     pointExist = true;
     return;
   }
-  if(e.target.value == "." && expression.innerHTML.slice(-1) == "0"){
-    expression.innerHTML +=".";
+  if(e.target.value == "." && expression.value.slice(-1) == "0"){
+    expression.value +=".";
     pointExist = true;
     return;
   }
 
-  if(expression.innerHTML.slice(-2) == "0." && e.target.value != "."){
-    expression.innerHTML += e.target.value;
+  if(expression.value.slice(-2) == "0." && e.target.value != "."){
+    expression.value += e.target.value;
     pointExist = true;
     return;
   }
-  if(expression.innerHTML[0] == "0" && e.target.value != "." && expression.innerHTML.length == 1){
-    expression.innerHTML = e.target.value;
+  if(expression.value[0] == "0" && e.target.value != "." && expression.value.length == 1){
+    expression.value = e.target.value;
     return;
   }
 
-  expression.innerHTML += e.target.value
+  expression.value += e.target.value
 }; 
 
 const deleteString = () =>{
   pointExist = false;
   if(!currentNumber.value){
-    expression.innerHTML = "0";
+    expression.value = "0";
     return;
   }
   currentNumber.classList.remove("result");
@@ -64,40 +64,40 @@ const deleteChar = () =>{
   if(currentNumber.value)
     deleteString();
 
-    if(expression.innerHTML == 0){
+    if(expression.value == 0){
       return;
     }
-    if(expression.innerHTML.length == 1){
+    if(expression.value.length == 1){
       pointExist = false;
-      expression.innerHTML = "0";
+      expression.value = "0";
       return;
     }
-    if(expression.innerHTML.slice(0, -1) == ".")
+    if(expression.value.slice(0, -1) == ".")
       pointExist = false;
 
-    expression.innerHTML = expression.innerHTML.slice(0, -1);
+    expression.value = expression.value.slice(0, -1);
 };
 
 const handleAction = (e) =>{
-  if(isNaN(Number(expression.innerHTML.slice(-1))) && expression.innerHTML.slice(-1) == ".")
+  if(isNaN(Number(expression.value.slice(-1))) && expression.value.slice(-1) == ".")
     return;
   pointExist = false;
 
-  if(isNaN(Number(expression.innerHTML.slice(-1))) && expression.innerHTML.slice(-1) != "."){
-    expression.innerHTML = replaceAt(expression.innerHTML.lastIndexOf(expression.innerHTML.slice(-1)), expression.innerHTML, e.target.value);
+  if(isNaN(Number(expression.value.slice(-1))) && expression.value.slice(-1) != "."){
+    expression.value = replaceAt(expression.value.lastIndexOf(expression.value.slice(-1)), expression.value, e.target.value);
     return;
   }
-  if(expression.innerHTML.slice(-1) == "0" && expression.innerHTML.length == 1){
+  if(expression.value.slice(-1) == "0" && expression.value.length == 1){
     return;
   }
-  expression.innerHTML += e.target.value;
+  expression.value += e.target.value;
 }
 
 const resolveAnswer = () =>{
-  if(isNaN(expression.innerHTML.slice(-1)))
-    expression.innerHTML = expression.innerHTML.slice(0, -1);
+  if(isNaN(expression.value.slice(-1)))
+    expression.value = expression.value.slice(0, -1);
 
-  let result = eval(expression.innerHTML);
+  let result = eval(expression.value);
   currentNumber.classList.add("result");
   isResult = true;
   if(result.toString().lastIndexOf('.') == -1){

@@ -29,11 +29,16 @@ span{
   font-weight: 600;
 }
 .expression{
+  background-color: transparent;
+  border: none;
   color:var(--highcontrast);
-  text-align: end;
+  text-align: right;
   font-family: 'Chakra Petch',Arial, Helvetica, sans-serif;
   font-weight: 600;
   width: 43%;
+}
+.expression::placeholder{
+  color:var(--highcontrast);
 }
 .input.result{
   color:var(--lowcontrast);
@@ -45,6 +50,13 @@ span{
   transform: translate(-50%,-50%);
   background-color: var(--black);
   padding: 5%;
+}
+input{
+  -webkit-touch-callout: none;  
+  -webkit-user-select: none;
+  -khtml-user-select: none; 
+  -moz-user-select: none;  
+  -ms-user-select: none; 
 }
 .input{
   height: 40px;
@@ -58,7 +70,7 @@ span{
   text-align: right;
   margin-bottom: 10px;
 }
-.input:focus{
+.input:focus, .expression:focus{
   outline: none;
 }
 .contrast{
