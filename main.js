@@ -5,11 +5,12 @@ const currentNumber = document.querySelector(".input");
 const charElements = document.querySelectorAll(".char");
 const contrastElements = document.querySelectorAll(".contrast");
 
-expression.innerHTML = "";
+expression.innerHTML = "6567";
 
 const inputChar = (e) => { 
-  if(e.target.value[0] == 0)
+  if(!currentNumber.value[0] && e.target.value == "0")
     return;
+
   currentNumber.value += e.target.value
 }; 
 const deleteChar = (e) =>{
@@ -28,7 +29,7 @@ const deleteString = (e) =>{
     expression.innerHTML = "0";
     return;
   }
-    currentNumber.value = "0";
+    currentNumber.value = "";
 };
 
 charElements.forEach(btn => {
