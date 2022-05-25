@@ -7,11 +7,12 @@ const answer = document.querySelector(".ans");
 const emptyBtn = document.querySelector(".contrast[value='E']");
 const clearBtn = document.querySelector(".contrast[value='C']");
 
+
 let isResult = false;
 let pointExist = false;
 
 const inputChar = (e) => { 
-  if(expression.innerHTML[0] == 0 && e.target.value == "0"){
+  if(expression.innerHTML[0] == 0 && e.target.value == "0" && expression.length == 1){
     return;
   }
   if(e.target.value == "." && pointExist)
@@ -29,7 +30,7 @@ const inputChar = (e) => {
     pointExist = true;
     return;
   }
-  if(e.target.value == "." && expression.innerHTML[length - 1] == "0"){
+  if(e.target.value == "." && expression.innerHTML.slice(-1) == "0"){
     expression.innerHTML +=".";
     pointExist = true;
     return;
@@ -78,16 +79,16 @@ const deleteChar = () =>{
 };
 
 const handleAction = (e) =>{
-  if(isNaN(Number(expression.innerHTML.slice(-1))) && expression.innerHTML.slice(-1) == "."){
+  console.log(expression.innerHTML.slice(-1));
+  if(isNaN(Number(expression.innerHTML.slice(-1))) && expression.innerHTML.slice(-1) == ".")
     return;
-  }
   pointExist = false;
 
   if(isNaN(Number(expression.innerHTML.slice(-1))) && expression.innerHTML.slice(-1) != "."){
     expression.innerHTML = replaceAt(expression.innerHTML.lastIndexOf(expression.innerHTML.slice(-1)), expression.innerHTML, e.target.value);
     return;
   }
-  if(expression.innerHTML.slice(-1) == "0"){
+  if(expression.innerHTML.slice(-1) == "0" && expression.length == 1){
     return;
   }
   expression.innerHTML += e.target.value;

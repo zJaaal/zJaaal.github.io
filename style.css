@@ -6,12 +6,12 @@ html, body{
 :root{
   --highcontrast:#2CB67D ;
   --lowcontrast: #7f5af0;
-  --font: #FFFFFE;
+  --white: #FFFFFE;
   --shade: #94A1B2;
-  --background: #16161A;
+  --black: #16161A;
 }
 body{
-  background-color: #16161A;;
+  background-color: var(--black);
   position: relative;
 }
 .powered{
@@ -43,14 +43,14 @@ span{
   top: 50%;
   left: 50%;
   transform: translate(-50%,-50%);
-  background-color: #16161A;
+  background-color: var(--black);
   padding: 5%;
 }
 .input{
   height: 40px;
   background-color: transparent;
   border: none;
-  color: var(--font);
+  color: var(--white);
   font-size: 250%;
   font-family: 'Chakra Petch', Arial, Helvetica, sans-serif;
   font-weight: 700;
@@ -65,14 +65,14 @@ span{
   background-color: var(--highcontrast);
 }
 .contrast:hover{
-  background-color: var(--font);
+  background-color: var(--white);
 }
 .ans{
   background-color: var(--lowcontrast);
 }
 .ans:hover{
  background-color: #32235e;
- color: var(--font);
+ color: var(--white);
 }
 .char:hover{
   background-color: var(--shade);
