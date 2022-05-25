@@ -11,26 +11,34 @@ const clearBtn = document.querySelector(".contrast[value='C']");
 let isResult = false;
 let pointExist = false;
 
+const state ={
+  lastChar: ""
+};
+const setState = (key, value = "0") => {
+  state[key] = value
+};
+
 const inputChar = (e) => { 
+  setState("lastChar", expression.value.slice(-1));
   if(expression.value[0] == 0 && e.target.value == "0" && expression.length == 1){
     return;
   }
   if(e.target.value == "." && pointExist)
     return;
     
-    if(e.target.value == "." && isNaN(Number(expression.value.slice(-1))) && expression.value.slice(-1) != "."){;
+    if(e.target.value == "." && isNaN(Number(state.lastChar)) && state.lastChar != "."){;
       expression.value += "0.";
       pointExist = true
       return;
     }
 
-  if(e.target.value == "." && isNaN(Number(expression.value.slice(-1)))){
-    console.log(expression.value.slice(-1));
+  if(e.target.value == "." && isNaN(Number(state.lastChar))){
+    console.log(state.lastChar);
     expression.value = "0.";
     pointExist = true;
     return;
   }
-  if(e.target.value == "." && expression.value.slice(-1) == "0"){
+  if(e.target.value == "." && state.lastChar == "0"){
     expression.value +=".";
     pointExist = true;
     return;
@@ -79,28 +87,33 @@ const deleteChar = () =>{
 };
 
 const handleAction = (e) =>{
-  if(isNaN(Number(expression.value.slice(-1))) && expression.value.slice(-1) == ".")
+  setState("lastChar", expression.value.slice(-1));
+
+  if(isNaN(Number(state.lastChar)) && state.lastChar == ".")
     return;
   pointExist = false;
 
-  if(isNaN(Number(expression.value.slice(-1))) && expression.value.slice(-1) != "."){
-    expression.value = replaceAt(expression.value.lastIndexOf(expression.value.slice(-1)), expression.value, e.target.value);
+  if(isNaN(Number(state.lastChar)) && state.lastChar != "."){
+    expression.value = replaceAt(expression.value.lastIndexOf(state.lastChar), expression.value, e.target.value);
     return;
   }
-  if(expression.value.slice(-1) == "0" && expression.value.length == 1){
+  if(state.lastChar == "0" && expression.value.length == 1){
     return;
   }
   expression.value += e.target.value;
 }
 
 const resolveAnswer = () =>{
-  if(isNaN(expression.value.slice(-1)))
+  setState("lastChar", expression.value.slice(-1));
+
+  if(isNaN(state.lastChar))
     expression.value = expression.value.slice(0, -1);
 
   let result = eval(expression.value);
   currentNumber.classList.add("result");
   isResult = true;
-  if(result.toString().lastIndexOf('.') == -1){
+
+  if(result.toString().lastIndexOf('.') == -1 && result.toString().length > 6){
     result = result.toExponential(2);
     currentNumber.value = "= " + result;
     return;
