@@ -2,12 +2,6 @@
 html, body{
   width: 100%;
   height: 100%;
-  -webkit-touch-callout: none;  
-  -webkit-user-select: none;
-  -khtml-user-select: none; 
-  -moz-user-select: none;  
-  -ms-user-select: none; 
-  user-select: none; 
 }
 :root{
   --highcontrast:#2CB67D ;
@@ -84,6 +78,12 @@ span{
   background-color: var(--shade);
 }
 button{
+  -webkit-touch-callout: none;  
+  -webkit-user-select: none;
+  -khtml-user-select: none; 
+  -moz-user-select: none;  
+  -ms-user-select: none; 
+  user-select: none; 
   outline: none !important;
   min-height: 10px;
   min-width: 14px;
